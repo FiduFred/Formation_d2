@@ -27,12 +27,13 @@ class ComputerController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+      /*  $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('ParkBundle:Computer')->findAll();
-
+        */
+        $entities = $this->get('park.computer_manager');
         return array(
-            'entities' => $entities,
+            'entities' => $entities->getComputers(),
         );
     }
     /**
