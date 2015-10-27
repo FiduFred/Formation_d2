@@ -270,19 +270,173 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'app_homepage',);
         }
 
-        if (0 === strpos($pathinfo, '/park/computer')) {
-            // computer
-            if (rtrim($pathinfo, '/') === '/park/computer') {
-                if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'computer');
-                }
+        if (0 === strpos($pathinfo, '/park')) {
+            if (0 === strpos($pathinfo, '/park/computer')) {
+                // computer
+                if (rtrim($pathinfo, '/') === '/park/computer') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_computer;
+                    }
 
-                return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::indexAction',  '_route' => 'computer',);
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'computer');
+                    }
+
+                    return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::indexAction',  '_route' => 'computer',);
+                }
+                not_computer:
+
+                // computer_create
+                if ($pathinfo === '/park/computer/') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_computer_create;
+                    }
+
+                    return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::createAction',  '_route' => 'computer_create',);
+                }
+                not_computer_create:
+
+                // computer_new
+                if ($pathinfo === '/park/computer/new') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_computer_new;
+                    }
+
+                    return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::newAction',  '_route' => 'computer_new',);
+                }
+                not_computer_new:
+
+                // computer_show
+                if (preg_match('#^/park/computer/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_computer_show;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_show')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::showAction',));
+                }
+                not_computer_show:
+
+                // computer_edit
+                if (preg_match('#^/park/computer/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_computer_edit;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_edit')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::editAction',));
+                }
+                not_computer_edit:
+
+                // computer_update
+                if (preg_match('#^/park/computer/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'PUT') {
+                        $allow[] = 'PUT';
+                        goto not_computer_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_update')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::updateAction',));
+                }
+                not_computer_update:
+
+                // computer_delete
+                if (preg_match('#^/park/computer/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'DELETE') {
+                        $allow[] = 'DELETE';
+                        goto not_computer_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_delete')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::deleteAction',));
+                }
+                not_computer_delete:
+
             }
 
-            // computer_debug
-            if ($pathinfo === '/park/computer/debug') {
-                return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::debugAction',  '_route' => 'computer_debug',);
+            if (0 === strpos($pathinfo, '/park/person')) {
+                // person
+                if (rtrim($pathinfo, '/') === '/park/person') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_person;
+                    }
+
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'person');
+                    }
+
+                    return array (  '_controller' => 'ParkBundle\\Controller\\PersonController::indexAction',  '_route' => 'person',);
+                }
+                not_person:
+
+                // person_create
+                if ($pathinfo === '/park/person/') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_person_create;
+                    }
+
+                    return array (  '_controller' => 'ParkBundle\\Controller\\PersonController::createAction',  '_route' => 'person_create',);
+                }
+                not_person_create:
+
+                // person_new
+                if ($pathinfo === '/park/person/new') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_person_new;
+                    }
+
+                    return array (  '_controller' => 'ParkBundle\\Controller\\PersonController::newAction',  '_route' => 'person_new',);
+                }
+                not_person_new:
+
+                // person_show
+                if (preg_match('#^/park/person/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_person_show;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_show')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::showAction',));
+                }
+                not_person_show:
+
+                // person_edit
+                if (preg_match('#^/park/person/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_person_edit;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_edit')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::editAction',));
+                }
+                not_person_edit:
+
+                // person_update
+                if (preg_match('#^/park/person/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'PUT') {
+                        $allow[] = 'PUT';
+                        goto not_person_update;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_update')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::updateAction',));
+                }
+                not_person_update:
+
+                // person_delete
+                if (preg_match('#^/park/person/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'DELETE') {
+                        $allow[] = 'DELETE';
+                        goto not_person_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_delete')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::deleteAction',));
+                }
+                not_person_delete:
+
             }
 
         }
