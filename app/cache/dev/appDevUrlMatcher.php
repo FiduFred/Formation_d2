@@ -261,19 +261,10 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // app_homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'app_homepage');
-            }
-
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'app_homepage',);
-        }
-
         if (0 === strpos($pathinfo, '/park')) {
             // calc_sum
             if (0 === strpos($pathinfo, '/park/sum') && preg_match('#^/park/sum/(?P<a>[^/]++)/(?P<b>[^/]++)$#s', $pathinfo, $matches)) {
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'calc_sum')), array (  '_controller' => 'ParkBundle\\Controller\\CalculatorController::sumAction',));
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'calc_sum')), array (  '_controller' => 'AppBundle\\Controller\\CalculatorController::sumAction',));
             }
 
             if (0 === strpos($pathinfo, '/park/computer')) {
@@ -288,7 +279,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         return $this->redirect($pathinfo.'/', 'computer');
                     }
 
-                    return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::indexAction',  '_route' => 'computer',);
+                    return array (  '_controller' => 'AppBundle\\Controller\\ComputerController::indexAction',  '_route' => 'computer',);
                 }
                 not_computer:
 
@@ -299,7 +290,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_computer_create;
                     }
 
-                    return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::createAction',  '_route' => 'computer_create',);
+                    return array (  '_controller' => 'AppBundle\\Controller\\ComputerController::createAction',  '_route' => 'computer_create',);
                 }
                 not_computer_create:
 
@@ -310,7 +301,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_computer_new;
                     }
 
-                    return array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::newAction',  '_route' => 'computer_new',);
+                    return array (  '_controller' => 'AppBundle\\Controller\\ComputerController::newAction',  '_route' => 'computer_new',);
                 }
                 not_computer_new:
 
@@ -321,7 +312,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_computer_show;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_show')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::showAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_show')), array (  '_controller' => 'AppBundle\\Controller\\ComputerController::showAction',));
                 }
                 not_computer_show:
 
@@ -332,7 +323,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_computer_edit;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_edit')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::editAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_edit')), array (  '_controller' => 'AppBundle\\Controller\\ComputerController::editAction',));
                 }
                 not_computer_edit:
 
@@ -343,7 +334,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_computer_update;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_update')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::updateAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_update')), array (  '_controller' => 'AppBundle\\Controller\\ComputerController::updateAction',));
                 }
                 not_computer_update:
 
@@ -354,7 +345,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_computer_delete;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_delete')), array (  '_controller' => 'ParkBundle\\Controller\\ComputerController::deleteAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'computer_delete')), array (  '_controller' => 'AppBundle\\Controller\\ComputerController::deleteAction',));
                 }
                 not_computer_delete:
 
@@ -372,7 +363,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         return $this->redirect($pathinfo.'/', 'person');
                     }
 
-                    return array (  '_controller' => 'ParkBundle\\Controller\\PersonController::indexAction',  '_route' => 'person',);
+                    return array (  '_controller' => 'AppBundle\\Controller\\PersonController::indexAction',  '_route' => 'person',);
                 }
                 not_person:
 
@@ -383,7 +374,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_person_create;
                     }
 
-                    return array (  '_controller' => 'ParkBundle\\Controller\\PersonController::createAction',  '_route' => 'person_create',);
+                    return array (  '_controller' => 'AppBundle\\Controller\\PersonController::createAction',  '_route' => 'person_create',);
                 }
                 not_person_create:
 
@@ -394,7 +385,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_person_new;
                     }
 
-                    return array (  '_controller' => 'ParkBundle\\Controller\\PersonController::newAction',  '_route' => 'person_new',);
+                    return array (  '_controller' => 'AppBundle\\Controller\\PersonController::newAction',  '_route' => 'person_new',);
                 }
                 not_person_new:
 
@@ -405,7 +396,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_person_show;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_show')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::showAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_show')), array (  '_controller' => 'AppBundle\\Controller\\PersonController::showAction',));
                 }
                 not_person_show:
 
@@ -416,7 +407,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_person_edit;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_edit')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::editAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_edit')), array (  '_controller' => 'AppBundle\\Controller\\PersonController::editAction',));
                 }
                 not_person_edit:
 
@@ -427,7 +418,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_person_update;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_update')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::updateAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_update')), array (  '_controller' => 'AppBundle\\Controller\\PersonController::updateAction',));
                 }
                 not_person_update:
 
@@ -438,7 +429,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                         goto not_person_delete;
                     }
 
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_delete')), array (  '_controller' => 'ParkBundle\\Controller\\PersonController::deleteAction',));
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'person_delete')), array (  '_controller' => 'AppBundle\\Controller\\PersonController::deleteAction',));
                 }
                 not_person_delete:
 

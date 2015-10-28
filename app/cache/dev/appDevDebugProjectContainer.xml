@@ -20,7 +20,6 @@
       <parameter key="HautelookAliceBundle">Hautelook\AliceBundle\HautelookAliceBundle</parameter>
       <parameter key="BraincraftedBootstrapBundle">Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle</parameter>
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
-      <parameter key="ParkBundle">ParkBundle\ParkBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -443,7 +442,7 @@
     <parameter key="assetic.write_to">C:\www\formation_d2\app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
     <parameter key="assetic.java.bin">/usr/bin/java</parameter>
-    <parameter key="assetic.node.bin">C:\Program Files\nodejs\node.EXE</parameter>
+    <parameter key="assetic.node.bin">C:\Program Files\nodejs\\node.EXE</parameter>
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
     <parameter key="assetic.reactjsx.bin">/usr/bin/jsx</parameter>
@@ -2054,7 +2053,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5630a161c38426.53283968</argument>
+            <argument>5630e315a2d491.48580578</argument>
           </service>
         </argument>
       </argument>
@@ -2358,7 +2357,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>5630a161c38426.53283968</argument>
+            <argument>5630e315a2d491.48580578</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -2996,7 +2995,7 @@
         <service class="Doctrine\ORM\Configuration" public="false">
           <call method="setEntityNamespaces">
             <argument type="collection">
-              <argument key="ParkBundle">ParkBundle\Entity</argument>
+              <argument key="AppBundle">AppBundle\Entity</argument>
             </argument>
           </call>
           <call method="setMetadataCacheImpl">
@@ -3016,11 +3015,11 @@
                     <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
                       <argument type="service" id="annotation_reader"/>
                       <argument type="collection">
-                        <argument>C:\www\formation_d2\src\ParkBundle\Entity</argument>
+                        <argument>C:\www\formation_d2\src\AppBundle\Entity</argument>
                       </argument>
                     </service>
                   </argument>
-                  <argument>ParkBundle\Entity</argument>
+                  <argument>AppBundle\Entity</argument>
                 </call>
               </service>
             </argument>
@@ -3165,13 +3164,13 @@
     <service id="braincrafted_bootstrap.flash" class="Braincrafted\Bundle\BootstrapBundle\Session\FlashMessage">
       <argument type="service" id="session"/>
     </service>
-    <service id="park.twig.computer_status_extension" class="ParkBundle\Twig\ComputerStatusExtension">
+    <service id="park.twig.computer_status_extension" class="AppBundle\Twig\ComputerStatusExtension">
       <tag name="twig.extension"/>
     </service>
-    <service id="park.computer_manager" class="ParkBundle\Services\ComputerManager">
+    <service id="park.computer_manager" class="AppBundle\Services\ComputerManager">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
-    <service id="park.calculator" class="ParkBundle\Services\Calculator"/>
+    <service id="park.calculator" class="AppBundle\Services\Calculator"/>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
@@ -3544,10 +3543,6 @@
       <call method="addPath">
         <argument>C:\www\formation_d2\src\AppBundle/Resources/views</argument>
         <argument>App</argument>
-      </call>
-      <call method="addPath">
-        <argument>C:\www\formation_d2\src\ParkBundle/Resources/views</argument>
-        <argument>Park</argument>
       </call>
       <call method="addPath">
         <argument>C:\www\formation_d2\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
