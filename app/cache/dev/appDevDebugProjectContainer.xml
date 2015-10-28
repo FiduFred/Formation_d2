@@ -443,7 +443,7 @@
     <parameter key="assetic.write_to">C:\www\formation_d2\app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
     <parameter key="assetic.java.bin">/usr/bin/java</parameter>
-    <parameter key="assetic.node.bin">C:\Program Files\nodejs\\node.EXE</parameter>
+    <parameter key="assetic.node.bin">C:\Program Files\nodejs\node.EXE</parameter>
     <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
     <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
     <parameter key="assetic.reactjsx.bin">/usr/bin/jsx</parameter>
@@ -743,6 +743,19 @@
           <service class="Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer" public="false">
             <tag name="kernel.cache_warmer"/>
             <argument type="service" id="router"/>
+          </service>
+        </argument>
+        <argument type="service">
+          <service class="Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer" public="false">
+            <tag name="kernel.cache_warmer"/>
+            <argument type="service" id="service_container"/>
+            <argument type="service">
+              <service class="Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder" public="false">
+                <argument type="service" id="kernel"/>
+                <argument type="service" id="templating.filename_parser"/>
+                <argument>C:\www\formation_d2\app/Resources</argument>
+              </service>
+            </argument>
           </service>
         </argument>
         <argument type="service">
@@ -1874,7 +1887,7 @@
     <service id="debug.debug_handlers_listener" class="Symfony\Component\HttpKernel\EventListener\DebugHandlersListener">
       <tag name="kernel.event_subscriber"/>
       <tag name="monolog.logger" channel="php"/>
-      <argument></argument>
+      <argument>null</argument>
       <argument type="service" id="monolog.logger.php" on-invalid="null"/>
       <argument>null</argument>
       <argument>null</argument>
@@ -2041,7 +2054,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>562fa67d96f962.46299380</argument>
+            <argument>5630a161c38426.53283968</argument>
           </service>
         </argument>
       </argument>
@@ -2345,7 +2358,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>562fa67d96f962.46299380</argument>
+            <argument>5630a161c38426.53283968</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -3158,6 +3171,7 @@
     <service id="park.computer_manager" class="ParkBundle\Services\ComputerManager">
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
     </service>
+    <service id="park.calculator" class="ParkBundle\Services\Calculator"/>
     <service id="data_collector.dump" class="Symfony\Component\HttpKernel\DataCollector\DumpDataCollector">
       <tag name="data_collector" id="dump" template="@Debug/Profiler/dump.html.twig"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>

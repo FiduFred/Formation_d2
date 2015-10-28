@@ -271,6 +271,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         if (0 === strpos($pathinfo, '/park')) {
+            // calc_sum
+            if (0 === strpos($pathinfo, '/park/sum') && preg_match('#^/park/sum/(?P<a>[^/]++)/(?P<b>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'calc_sum')), array (  '_controller' => 'ParkBundle\\Controller\\CalculatorController::sumAction',));
+            }
+
             if (0 === strpos($pathinfo, '/park/computer')) {
                 // computer
                 if (rtrim($pathinfo, '/') === '/park/computer') {

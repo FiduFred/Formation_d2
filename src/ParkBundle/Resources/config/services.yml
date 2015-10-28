@@ -6,3 +6,5 @@ services:
     park.computer_manager:
         class: ParkBundle\Services\ComputerManager
         arguments: ['@doctrine.orm.default_entity_manager']
+    park.calculator:
+        class: ParkBundle\Services\Calculator
