@@ -1,10 +1,15 @@
 services:
-    park.twig.computer_status_extension:
+    app.twig.computer_status_extension:
         class: AppBundle\Twig\ComputerStatusExtension
         tags:
             - { name: twig.extension }
-    park.computer_manager:
+    app.computer_manager:
         class: AppBundle\Services\ComputerManager
         arguments: ['@doctrine.orm.default_entity_manager']
-    park.calculator:
+    app.calculator:
         class: AppBundle\Services\Calculator
+    app.user_security:
+        class: AppBundle\Services\UserSecurity
+        arguments: [@security.encoder_factory]
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }

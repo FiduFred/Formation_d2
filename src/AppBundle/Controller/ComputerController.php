@@ -7,13 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Computer;
 use AppBundle\Form\ComputerType;
 
 /**
  * Computer controller.
  *
- * @Route("/computer")
+ * @Route("/park/computer")
  */
 class ComputerController extends Controller
 {
@@ -31,17 +32,19 @@ class ComputerController extends Controller
 
         $entities = $em->getRepository('AppBundle:Computer')->findAll();
         */
-        $entities = $this->get('park.computer_manager');
+        $entities = $this->get('app.computer_manager');
         return array(
             'entities' => $entities->getComputers(),
         );
     }
+
     /**
      * Creates a new Computer entity.
      *
      * @Route("/", name="computer_create")
      * @Method("POST")
      * @Template("AppBundle:Computer:new.html.twig")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function createAction(Request $request)
     {
@@ -67,7 +70,7 @@ class ComputerController extends Controller
      * Creates a form to create a Computer entity.
      *
      * @param Computer $entity The entity
-     *
+     * @Security("has_role('ROLE_ADMIN')")
      * @return \Symfony\Component\Form\Form The form
      */
     private function createCreateForm(Computer $entity)
@@ -88,6 +91,7 @@ class ComputerController extends Controller
      * @Route("/new", name="computer_new")
      * @Method("GET")
      * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newAction()
     {
@@ -131,6 +135,7 @@ class ComputerController extends Controller
      * @Route("/{id}/edit", name="computer_edit")
      * @Method("GET")
      * @Template()
+     * @Security("has_role('ROLE_MODERATOR')")
      */
     public function editAction($id)
     {
@@ -156,7 +161,7 @@ class ComputerController extends Controller
     * Creates a form to edit a Computer entity.
     *
     * @param Computer $entity The entity
-    *
+    * @Security("has_role('ROLE_MODERATOR')")
     * @return \Symfony\Component\Form\Form The form
     */
     private function createEditForm(Computer $entity)
@@ -175,6 +180,7 @@ class ComputerController extends Controller
      *
      * @Route("/{id}", name="computer_update")
      * @Method("PUT")
+     * @Security("has_role('ROLE_MODERATOR')")
      * @Template("AppBundle:Computer:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -208,6 +214,7 @@ class ComputerController extends Controller
      *
      * @Route("/{id}", name="computer_delete")
      * @Method("DELETE")
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(Request $request, $id)
     {
@@ -235,6 +242,7 @@ class ComputerController extends Controller
      * @param mixed $id The entity id
      *
      * @return \Symfony\Component\Form\Form The form
+     * @Security("has_role('ROLE_SUPER_ADMIN')")
      */
     private function createDeleteForm($id)
     {
